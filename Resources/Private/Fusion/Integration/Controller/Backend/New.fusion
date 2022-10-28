@@ -5,11 +5,6 @@ Sandstorm.NeosTwoFactorAuthentication.BackendController.new = Sandstorm.NeosTwoF
         teaserTitle = ${I18n.id('module.new.title').package('Sandstorm.NeosTwoFactorAuthentication').source('Backend').translate()}
         teaserText = ${I18n.id('module.new.description').package('Sandstorm.NeosTwoFactorAuthentication').source('Backend').translate()}
 
-
-        markus = Neos.Fusion:UriBuilder {
-
-        }
-
         content = Neos.Fusion:Component {
             renderer = afx`
             <Neos.Fusion.Form:Form form.target.action="create">
