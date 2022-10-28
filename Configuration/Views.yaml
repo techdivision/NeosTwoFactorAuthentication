@@ -4,3 +4,10 @@
   options:
     fusionPathPatterns:
       - 'resource://Sandstorm.NeosTwoFactorAuthentication/Private/Fusion/Login'
+
+-
+  requestFilter: 'isPackage("Sandstorm.NeosTwoFactorAuthentication") && isController("SecondFactorCreation") && isAction("index") || isAction("create") && isFormat("html")'
+  viewObjectName: 'Neos\Fusion\View\FusionView'
+  options:
+    fusionPathPatterns:
+      - 'resource://Sandstorm.NeosTwoFactorAuthentication/Private/Fusion/SecondFactorCreation'

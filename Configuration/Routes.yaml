@@ -8,6 +8,17 @@
   httpMethods: ['GET']
   appendExceedingArguments: true
 
+- name: 'Sandstorm Two Factor Authentication - Creation'
+  uriPattern: 'neos/enable-two-factor-login/{@action}'
+  defaults:
+    '@package': 'Sandstorm.NeosTwoFactorAuthentication'
+    '@controller': 'SecondFactorCreation'
+    '@action': 'index'
+    '@format': 'html'
+  httpMethods: ['GET', 'POST']
+  appendExceedingArguments: true
+
+
 - name: 'Sandstorm Two Factor Authentication - Validation'
   uriPattern: 'neos/two-factor-login'
   defaults:
