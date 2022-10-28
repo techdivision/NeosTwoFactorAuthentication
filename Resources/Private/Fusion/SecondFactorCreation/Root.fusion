@@ -6,8 +6,7 @@ include: **/*.fusion
 
 Sandstorm.NeosTwoFactorAuthentication.SecondFactorCreationController.index = Neos.Fusion:Component {
     site = null
-    username = ''
-    flashMessages = ${[]}
+    flashMessages = ${flashMessages}
 
     renderer = Neos.Fusion:Join {
         doctype = '<!DOCTYPE html>'
@@ -63,33 +62,83 @@ Sandstorm.NeosTwoFactorAuthentication.SecondFactorCreationController.index = Neo
                 <html lang="en">
                 {props.headerComment}
                 <head>
-                    <meta charset="utf-8" />
-                    <meta name="robots" content="noindex" />
-                    <title>{I18n.translate('login.index.title', 'Login to')} {props.site.name}</title>
+                    <meta charset="utf-8"/>
+                    <meta name="robots" content="noindex"/>
+                    <title>{props.teaserTitle}</title>
 
                     {props.stylesheetUri}
 
-                    <link href={StaticResource.uri('Neos.Neos', 'Public/Images/Icons/apple-touch-icon.png')} sizes="180x180" rel="apple-touch-icon" />
-                    <link href={StaticResource.uri('Neos.Neos', 'Public/Images/Icons/favicon-16x16.png')} sizes="16x16" rel="icon" type="image/png" />
-                    <link href={StaticResource.uri('Neos.Neos', 'Public/Images/Icons/favicon-32x32.png')} sizes="32x32" rel="icon" type="image/png" />
-                    <link href={StaticResource.uri('Neos.Neos', 'Public/Images/Icons/safari-pinned-tab.svg')} rel="mask-icon" color="#00adee" />
+                    <link href={StaticResource.uri('Neos.Neos', 'Public/Images/Icons/apple-touch-icon.png')}
+                          sizes="180x180" rel="apple-touch-icon"/>
+                    <link href={StaticResource.uri('Neos.Neos', 'Public/Images/Icons/favicon-16x16.png')} sizes="16x16"
+                          rel="icon" type="image/png"/>
+                    <link href={StaticResource.uri('Neos.Neos', 'Public/Images/Icons/favicon-32x32.png')} sizes="32x32"
+                          rel="icon" type="image/png"/>
+                    <link href={StaticResource.uri('Neos.Neos', 'Public/Images/Icons/safari-pinned-tab.svg')}
+                          rel="mask-icon" color="#00adee"/>
 
                     <style type="text/css" @if.set={props.backgroundImageSource && !props.backgroundImageSourceIsWebp}>
-                        {'body.neos--bg,.neos-login-box:before{background-image:url(' + props.backgroundImageSource + ')}'}
+                        {
+                        'body.neos--bg,.neos-login-box:before{background-image:url('
+                        +
+                        props
+                        .
+                        backgroundImageSource
+                        +
+                        ')}'
+                        }
                     </style>
                     <style type="text/css" @if.set={props.backgroundImageSource && props.backgroundImageSourceIsWebp}>
-                        {'.webp body.neos--bg,.webp .neos-login-box:before {background-image: url(' + props.backgroundImageSource + ')}'}
-                        {'.no-webp body.neos--bg,.no-webp .neos-login-box:before {background-image: url(' + String.substr(props.backgroundImageSource, 0, String.length(props.backgroundImageSource) - 4) + 'jpg)}'}
+                        {
+                        '.webp body.neos--bg,.webp .neos-login-box:before {background-image: url('
+                        +
+                        props
+                        .
+                        backgroundImageSource
+                        +
+                        ')}'
+                        }
+                        {
+                        '.no-webp body.neos--bg,.no-webp .neos-login-box:before {background-image: url('
+                        +
+                        String
+                        .
+                        substr
+                        (
+                        props
+                        .
+                        backgroundImageSource
+                        ,
+                        0
+                        ,
+                        String
+                        .
+                        length
+                        (
+                        props
+                        .
+                        backgroundImageSource
+                        )
+                        -
+                        4
+                        )
+                        +
+                        'jpg)}'
+                        }
                     </style>
                 </head>
                 <body class={["neos", props.backgroundImageSource ? 'neos--bg' : null]} style="">
-                <img @if.set={props.backgroundImageSourceIsWebp} style="display: none" src="data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA" onload="document.documentElement.classList.add('webp')" onerror="document.documentElement.classList.add('no-webp')"/>
+                <img @if.set={props.backgroundImageSourceIsWebp} style="display: none"
+                     src="data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA"
+                     onload="document.documentElement.classList.add('webp')"
+                     onerror="document.documentElement.classList.add('no-webp')"/>
                 <div class="neos-modal-centered">
                     <main class="neos-login-main">
                         <div class={['neos-login-box', props.backgroundImageSource ? 'background-image-active' : null]}>
                             <figure class="neos-login-box-logo">
-                                <img class="neos-login-box-logo-resource" @children="attributes.src" width="200px" height="200px" alt="Neos Logo">
-                                <Neos.Fusion:ResourceUri path="resource://Neos.Neos/Public/Images/Login/Logo.svg" />
+                                <img class="neos-login-box-logo-resource" @children="attributes.src" width="200px"
+                                     height="200px" alt="Neos Logo">
+                                <Neos.Fusion:ResourceUri path="resource://Neos.Neos/Public/Images/Login/Logo.svg"/>
                                 </img>
                             </figure>
 
@@ -149,22 +198,24 @@ Sandstorm.NeosTwoFactorAuthentication.SecondFactorCreationController.index = Neo
                     <footer class="neos-login-footer">
                         <p>
                             <a href="http://neos.io" target="_blank">Neos</a> –&nbsp;
-                            © 2006-{Date.format('now', 'Y')} This is free software, licensed under GPL3 or higher, and you are welcome to redistribute it under certain conditions;&nbsp;
+                            © 2006-{Date.format('now', 'Y')} This is free software, licensed under GPL3 or higher, and
+                            you are welcome to redistribute it under certain conditions;&nbsp;
                             Neos comes with ABSOLUTELY NO WARRANTY;&nbsp;
-                            See <a href="http://neos.io" target="_blank">neos.io</a> for more details. Obstructing the appearance of this notice is prohibited by law.
+                            See <a href="http://neos.io" target="_blank">neos.io</a> for more details. Obstructing the
+                            appearance of this notice is prohibited by law.
                         </p>
                     </footer>
                 </div>
 
                 <script>{"
-                                                                                        document.querySelector('form').addEventListener('submit', function() {
-                                                                                            document.querySelector('.neos-login-btn').classList.toggle('neos-hidden');
-                                                                                            document.querySelector('.neos-login-btn.neos-disabled').classList.toggle('neos-hidden');
-                                                                                        });
-                                                                                        try {
-                                                                                            document.querySelector('form[name=\"login\"] input[name=\"lastVisitedNode\"]').value = sessionStorage.getItem('Neos.Neos.lastVisitedNode');
-                                                                                        } catch(e) {}
-                                                                                    "}</script>
+                                                                                                        document.querySelector('form').addEventListener('submit', function() {
+                                                                                                            document.querySelector('.neos-login-btn').classList.toggle('neos-hidden');
+                                                                                                            document.querySelector('.neos-login-btn.neos-disabled').classList.toggle('neos-hidden');
+                                                                                                        });
+                                                                                                        try {
+                                                                                                            document.querySelector('form[name=\"login\"] input[name=\"lastVisitedNode\"]').value = sessionStorage.getItem('Neos.Neos.lastVisitedNode');
+                                                                                                        } catch(e) {}
+                                                                                                    "}</script>
                 </body>
                 </html>
             `

@@ -11,7 +11,9 @@ use chillerlan\QRCode\QROptions;
 use Neos\Error\Messages\Message;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Controller\ActionController;
+use Neos\Flow\Mvc\Exception\StopActionException;
 use Neos\Flow\Mvc\FlashMessage\FlashMessageService;
+use Neos\Flow\Persistence\Exception\IllegalObjectTypeException;
 use Neos\Flow\Security\Account;
 use Neos\Flow\Security\AccountRepository;
 use Neos\Flow\Security\Authentication\AuthenticationManagerInterface;
@@ -120,7 +122,12 @@ class SecondFactorCreationController extends ActionController
     }
 
     /**
-     * save the registered second factor
+     * @param string $secret
+     * @param string $secondFactorFromApp
+     * @param string $identifier
+     * @return void
+     * @throws StopActionException
+     * @throws IllegalObjectTypeException
      */
     public function createAction(string $secret, string $secondFactorFromApp, string $identifier)
     {
@@ -129,11 +136,11 @@ class SecondFactorCreationController extends ActionController
 
         // Redirect to start when token is not valid
         if (!$isValid) {
-            $this->addFlashMessage('Submitted OTP was not correct, please rescan the QR code and retry', '', Message::SEVERITY_WARNING);
+            $this->addFlashMessage('Submitted OTP was not correct. Please rescan the QR code and retry.', '', Message::SEVERITY_WARNING);
             $this->redirect('index', null, null, ['identifier' => $identifier]);
         }
 
-        // Update second factor in database
+        // Update the secondFactor data
         /** @var SecondFactor $secondFactor */
         $secondFactor = $this->secondFactorRepository->findOneBySessionIdentifier($identifier);
         $secondFactor->setSecret($secret);
@@ -142,7 +149,7 @@ class SecondFactorCreationController extends ActionController
         $this->secondFactorRepository->update($secondFactor);
         $this->persistenceManager->persistAll();
 
-        // Redirect to the neos login page
+        // Redirect to the login page
         $this->addFlashMessage('Successfully created otp');
         $this->redirect('index', 'Login', 'Neos.Neos');
     }
