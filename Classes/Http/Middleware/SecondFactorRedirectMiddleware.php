@@ -2,9 +2,7 @@
 
 namespace Sandstorm\NeosTwoFactorAuthentication\Http\Middleware;
 
-use Neos\Flow\Annotations as Flow;
 use GuzzleHttp\Psr7\Response;
-use Neos\Flow\Session\SessionManagerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -14,13 +12,6 @@ use Sandstorm\NeosTwoFactorAuthentication\Error\SecondFactorRequiredException;
 
 class SecondFactorRedirectMiddleware implements MiddlewareInterface
 {
-
-    /**
-     * @var SessionManagerInterface
-     * @Flow\Inject
-     */
-    protected $sessionManager;
-
     public function process(ServerRequestInterface $request, RequestHandlerInterface $next): ResponseInterface
     {
         try {

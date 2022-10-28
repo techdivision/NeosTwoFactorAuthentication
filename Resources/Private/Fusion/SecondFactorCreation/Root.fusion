@@ -1,8 +1,6 @@
 # you need to include ALL packages you want to use here, there is no AutoInclude!
 include: resource://Neos.Fusion/Private/Fusion/Root.fusion
 include: resource://Neos.Fusion.Form/Private/Fusion/Root.fusion
-include: resource://Sandstorm.NeosTwoFactorAuthentication/Private/Fusion/Presentation/Root.fusion
-include: **/*.fusion
 
 Sandstorm.NeosTwoFactorAuthentication.SecondFactorCreationController.index = Neos.Fusion:Component {
     site = null
@@ -67,7 +65,6 @@ Sandstorm.NeosTwoFactorAuthentication.SecondFactorCreationController.index = Neo
                     <title>{props.teaserTitle}</title>
 
                     {props.stylesheetUri}
-
                     <link href={StaticResource.uri('Neos.Neos', 'Public/Images/Icons/apple-touch-icon.png')}
                           sizes="180x180" rel="apple-touch-icon"/>
                     <link href={StaticResource.uri('Neos.Neos', 'Public/Images/Icons/favicon-16x16.png')} sizes="16x16"
@@ -78,53 +75,11 @@ Sandstorm.NeosTwoFactorAuthentication.SecondFactorCreationController.index = Neo
                           rel="mask-icon" color="#00adee"/>
 
                     <style type="text/css" @if.set={props.backgroundImageSource && !props.backgroundImageSourceIsWebp}>
-                        {
-                        'body.neos--bg,.neos-login-box:before{background-image:url('
-                        +
-                        props
-                        .
-                        backgroundImageSource
-                        +
-                        ')}'
-                        }
+                        {'body.neos--bg,.neos-login-box:before{background-image:url(' + props.backgroundImageSource + ')}'}
                     </style>
                     <style type="text/css" @if.set={props.backgroundImageSource && props.backgroundImageSourceIsWebp}>
-                        {
-                        '.webp body.neos--bg,.webp .neos-login-box:before {background-image: url('
-                        +
-                        props
-                        .
-                        backgroundImageSource
-                        +
-                        ')}'
-                        }
-                        {
-                        '.no-webp body.neos--bg,.no-webp .neos-login-box:before {background-image: url('
-                        +
-                        String
-                        .
-                        substr
-                        (
-                        props
-                        .
-                        backgroundImageSource
-                        ,
-                        0
-                        ,
-                        String
-                        .
-                        length
-                        (
-                        props
-                        .
-                        backgroundImageSource
-                        )
-                        -
-                        4
-                        )
-                        +
-                        'jpg)}'
-                        }
+                        {'.webp body.neos--bg,.webp .neos-login-box:before {background-image: url(' + props.backgroundImageSource + ')}'}
+                        {'.no-webp body.neos--bg,.no-webp .neos-login-box:before {background-image: url(' + String.substr(props.backgroundImageSource, 0, String.length(props.backgroundImageSource) - 4) + 'jpg)}'}
                     </style>
                 </head>
                 <body class={["neos", props.backgroundImageSource ? 'neos--bg' : null]} style="">
