@@ -1,3 +1,9 @@
+Sandstorm:
+  NeosTwoFactorAuthentication:
+    options:
+      forceSecondFactorAuthentication: true
+      secondFactorAuthenticationProvider: 'Neos.Neos:Backend'
+
 Neos:
   Neos:
     fusion:

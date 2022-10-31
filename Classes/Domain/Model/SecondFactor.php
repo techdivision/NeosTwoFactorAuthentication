@@ -37,6 +37,27 @@ class SecondFactor
     protected string $secret;
 
     /**
+     * @var string|null
+     */
+    protected ?string $sessionIdentifier;
+
+    /**
+     * @return string|null
+     */
+    public function getSessionIdentifier(): ?string
+    {
+        return $this->sessionIdentifier;
+    }
+
+    /**
+     * @param string|null $sessionIdentifier
+     */
+    public function setSessionIdentifier(?string $sessionIdentifier): void
+    {
+        $this->sessionIdentifier = $sessionIdentifier;
+    }
+
+    /**
      * @return Account
      */
     public function getAccount(): Account
